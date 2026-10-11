@@ -11,7 +11,7 @@ const getBaseUrl = (): string => {
   if (typeof process !== 'undefined' && process?.env?.NEXT_PUBLIC_API_BASE_URL) {
     return process.env.NEXT_PUBLIC_API_BASE_URL;
   }
-  return ' http://3.26.242.14';
+  return 'https://oblong-striving-bucked.ngrok-free.dev';
 };
 
 const BASE = getBaseUrl().replace(/\/$/, '');
