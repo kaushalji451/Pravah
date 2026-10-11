@@ -25,7 +25,7 @@ export class ApiError extends Error {
 async function get<T>(path: string, signal?: AbortSignal): Promise<T> {
   let res: Response;
   try {
-    res = await fetch(`${BASE}${path}`, { signal, headers: { Accept: 'application/json' } });
+    res = await fetch(`${BASE}${path}`, { signal, headers: { Accept: 'application/json','ngrok-skip-browser-warning': 'true' } });
   } catch (e) {
     if ((e as Error).name === 'AbortError') throw e;
     throw new ApiError(`Can't reach the Pravah server at ${BASE}. Check that the backend is running.`);
