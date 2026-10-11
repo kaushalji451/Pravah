@@ -4,3 +4,4 @@ node_modules
 .env.local
 backend/data/gmda-schema.snapshot.json
 Study.md
+pravah-backend.zip

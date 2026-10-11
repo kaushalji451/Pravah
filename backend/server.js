@@ -26,17 +26,37 @@ app.use((err, _req, res, _next) => {
   res.status(500).json({ error: 'Something went wrong on the Pravah server.' });
 });
 
-app.listen(config.port, () => {
-  console.log(`Pravah API on http://localhost:${config.port}`);
-  if (config.demoMode) {
-    console.warn('DEMO_MODE=true — GMDA records are SYNTHETIC and labelled "DEMO DATA — NOT OFFICIAL".');
-    return;
-  }
-  // Warm the schema cache and show which real GMDA fields were matched.
-  getLayerSchema()
-    .then((s) => {
-      console.log(`GMDA layer "${s.layerName}" — ${s.fields.length} fields. Role mapping:`);
-      for (const [role, r] of Object.entries(s.roles)) console.log(`  ${role.padEnd(18)} → ${r.field ?? '(none)'}  [${r.matchedBy}]`);
-    })
-    .catch((e) => console.warn(`GMDA schema not loaded yet: ${e.message}. Requests will retry.`));
-});
+export default app;
+
+
+// Run the HTTP server locally, but not inside AWS Lambda.
+if (!process.env.AWS_LAMBDA_FUNCTION_NAME) {
+  app.listen(config.port, () => {
+    console.log(`Pravah API on http://localhost:${config.port}`);
+
+    if (config.demoMode) {
+      console.warn(
+        'DEMO_MODE=true — GMDA records are SYNTHETIC and labelled "DEMO DATA — NOT OFFICIAL".'
+      );
+      return;
+    }
+
+    getLayerSchema()
+      .then((s) => {
+        console.log(
+          `GMDA layer "${s.layerName}" — ${s.fields.length} fields. Role mapping:`
+        );
+
+        for (const [role, r] of Object.entries(s.roles)) {
+          console.log(
+            `  ${role.padEnd(18)} → ${r.field ?? '(none)'} [${r.matchedBy}]`
+          );
+        }
+      })
+      .catch((e) =>
+        console.warn(
+          `GMDA schema not loaded yet: ${e.message}. Requests will retry.`
+        )
+      );
+  });
+}
