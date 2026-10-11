@@ -11,7 +11,7 @@ const getBaseUrl = (): string => {
   if (typeof process !== 'undefined' && process?.env?.NEXT_PUBLIC_API_BASE_URL) {
     return process.env.NEXT_PUBLIC_API_BASE_URL;
   }
-  return 'https://rqza50bkhg.execute-api.ap-southeast-2.amazonaws.com';
+  return ' http://3.26.242.14';
 };
 
 const BASE = getBaseUrl().replace(/\/$/, '');
