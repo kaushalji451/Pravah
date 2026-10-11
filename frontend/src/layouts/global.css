@@ -1,0 +1,114 @@
+@import url('https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,300..700&display=swap');
+
+:root {
+  --color-abyss: #050B14;
+  --color-basin: #0A1522;
+  --color-ink: #E8F3F6;
+  --color-mist: #8FA7B3;
+  --color-teal: #2DD4BF;
+  --color-teal-soft: #5EEAD4;
+  --color-teal-foam: #E8FFFB;
+  --color-sky: #7CC4FF;
+  --color-coral: #FB7185;
+  --color-amber: #F5B454;
+}
+
+/* Color utility classes to ensure robust fallback */
+.bg-abyss { background-color: var(--color-abyss); }
+.bg-basin { background-color: var(--color-basin); }
+.text-ink { color: var(--color-ink); }
+.text-mist { color: var(--color-mist); }
+.text-teal { color: var(--color-teal); }
+.text-teal-soft { color: var(--color-teal-soft); }
+.text-teal-foam { color: var(--color-teal-foam); }
+.text-sky { color: var(--color-sky); }
+.text-coral { color: var(--color-coral); }
+.text-amber { color: var(--color-amber); }
+
+.border-teal { border-color: var(--color-teal); }
+.border-sky { border-color: var(--color-sky); }
+.border-coral { border-color: var(--color-coral); }
+.border-amber { border-color: var(--color-amber); }
+
+/* Carried over from the Pravah landing page */
+html {
+  scroll-behavior: smooth;
+  font-family: 'Bricolage Grotesque', ui-sans-serif, system-ui, -apple-system, 'Segoe UI', sans-serif;
+  background-color: #050B14;
+  color: #E8F3F6;
+}
+
+body {
+  background-color: #050B14;
+  color: #E8F3F6;
+  margin: 0;
+  padding: 0;
+}
+
+::selection { background: rgba(45, 212, 191, 0.3); color: #fff; }
+.tnum { font-variant-numeric: tabular-nums; }
+
+.pravah-grid {
+  background-image:
+    linear-gradient(rgba(148, 197, 214, 0.07) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(148, 197, 214, 0.07) 1px, transparent 1px);
+  background-size: 48px 48px;
+}
+.pravah-noise {
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='160' height='160'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>");
+}
+
+@keyframes pravah-flow-x { to { background-position: 18px 0; } }
+@keyframes pravah-flow-y { to { background-position: 0 18px; } }
+.pravah-flow-x {
+  background-image: repeating-linear-gradient(90deg, rgba(240, 253, 250, 0.9) 0 6px, transparent 6px 18px);
+  animation: pravah-flow-x 0.9s linear infinite;
+}
+.pravah-flow-y {
+  background-image: repeating-linear-gradient(180deg, rgba(240, 253, 250, 0.9) 0 6px, transparent 6px 18px);
+  animation: pravah-flow-y 0.9s linear infinite;
+}
+
+@keyframes pravah-fall {
+  0% { transform: translateY(-120px); opacity: 0; }
+  12% { opacity: 1; }
+  88% { opacity: 1; }
+  100% { transform: translateY(110vh); opacity: 0; }
+}
+.pravah-drop { animation: pravah-fall linear infinite; }
+
+@keyframes pravah-pulse {
+  0% { transform: scale(0.6); opacity: 0.8; }
+  100% { transform: scale(2.6); opacity: 0; }
+}
+
+.pravah-range { -webkit-appearance: none; appearance: none; width: 100%; height: 6px; border-radius: 999px; outline: none; cursor: pointer;
+  background: linear-gradient(90deg, #7CC4FF 0%, #2DD4BF var(--val), rgba(255,255,255,0.08) var(--val)); }
+.pravah-range::-webkit-slider-thumb { -webkit-appearance: none; appearance: none; width: 16px; height: 16px; border-radius: 999px;
+  background: #E8FFFB; border: 3px solid #2DD4BF; box-shadow: 0 0 0 6px rgba(45,212,191,0.15), 0 0 24px rgba(45,212,191,0.6); }
+.pravah-range::-moz-range-thumb { width: 12px; height: 12px; border-radius: 999px; background: #E8FFFB; border: 3px solid #2DD4BF;
+  box-shadow: 0 0 0 6px rgba(45,212,191,0.15), 0 0 24px rgba(45,212,191,0.6); }
+.pravah-range:focus-visible::-webkit-slider-thumb { box-shadow: 0 0 0 8px rgba(94,234,212,0.35); }
+.pravah-range:focus-visible::-moz-range-thumb { box-shadow: 0 0 0 8px rgba(94,234,212,0.35); }
+
+/* Demo data gets a hatched treatment so it can never be mistaken for real data */
+.pravah-hatch { background-image: repeating-linear-gradient(135deg, rgba(251,113,133,0.18) 0 6px, transparent 6px 12px); }
+
+/* Leaflet, themed */
+.leaflet-container { background: #07111C; font-family: inherit; }
+.leaflet-popup-content-wrapper, .leaflet-popup-tip { background: #0A1522; color: #E8F3F6; border: 1px solid rgba(148,197,214,0.18); box-shadow: 0 12px 40px rgba(0,0,0,0.5); }
+.leaflet-popup-content { margin: 12px 14px; font-size: 13px; line-height: 1.45; }
+.leaflet-container a.leaflet-popup-close-button { color: #8FA7B3; }
+.leaflet-control-attribution { background: rgba(5,11,20,0.75) !important; color: #8FA7B3 !important; font-size: 10px; }
+.leaflet-control-attribution a { color: #7CC4FF !important; }
+.leaflet-bar a { background: #0A1522; color: #E8F3F6; border-bottom-color: rgba(148,197,214,0.18); }
+.leaflet-bar a:hover { background: #12233A; }
+
+:focus-visible { outline: 2px solid #5EEAD4; outline-offset: 2px; }
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  .pravah-flow-x, .pravah-flow-y, .pravah-drop { animation: none !important; }
+  .pravah-drop { display: none; }
+  .pravah-pulse-ring { animation: none !important; }
+}
